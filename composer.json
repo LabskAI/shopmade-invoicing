@@ -1,0 +1,28 @@
+{
+    "name": "labskai/shopmade-invoicing",
+    "description": "Quotes, invoices, invoice PDFs and the client portal invoices tab for Shopmade.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "laravel/framework": "^13.0",
+        "barryvdh/laravel-dompdf": "^3.1"
+    },
+    "suggest": {
+        "labskai/shopmade-jobs": "Link quotes and invoices to jobs."
+    },
+    "autoload": {
+        "psr-4": {
+            "Shopmade\\Invoicing\\": "src/",
+            "Shopmade\\Invoicing\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Shopmade\\Invoicing\\InvoicingServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
