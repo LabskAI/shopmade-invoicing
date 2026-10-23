@@ -149,10 +149,10 @@ class InvoiceController extends Controller
     {
         return $request->validate([
             'customer_id' => ['required', 'exists:customers,id'],
-            'job_id' => JobLink::rules(),
+            'job_id' => JobLink::rules($request->integer('customer_id')),
             'quote_id' => [
                 'nullable',
-                'exists:quotes,id',
+                Rule::exists('quotes', 'id')->where('customer_id', $request->integer('customer_id')),
                 Rule::unique('invoices', 'quote_id')->ignore($invoice),
             ],
             'status' => ['required', Rule::enum(InvoiceStatus::class)],

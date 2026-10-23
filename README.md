@@ -10,7 +10,7 @@ Quotes, invoices and invoice PDFs for [Shopmade core](https://github.com/LabskAI
 - **Client portal:** an Invoices tab, the PDF, and a "paid / will pay" mark the client can leave (staff still set the status).
 - **MCP:** `invoices_list` (read-only), filterable by status or unpaid.
 
-With [shopmade-jobs](https://github.com/LabskAI/shopmade-jobs) installed, quotes and invoices can link to a job and the job page gets New quote / New invoice buttons. Without it the job field and links stay hidden.
+With [shopmade-jobs](https://github.com/LabskAI/shopmade-jobs) installed, quotes and invoices can link to a job and the job page gets New quote / New invoice buttons. Without it the job field and links stay hidden. The job must belong to the same customer. Install jobs before invoicing, or before its first `migrate`, so `quotes.job_id` and `invoices.job_id` get their foreign keys. If jobs comes later, the link still works (it is validated on save) but has no database constraint.
 
 ## Install
 

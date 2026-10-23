@@ -74,7 +74,7 @@ class InvoicingServiceProvider extends ServiceProvider
         $hooks->portalSection('invoicing::hooks.portal-section', fn (User $user): array => [
             'openInvoices' => Invoice::query()
                 ->whereIn('customer_id', $user->customers()->pluck('customers.id'))
-                ->whereNotIn('status', [InvoiceStatus::Paid, InvoiceStatus::Void])
+                ->whereNotIn('status', [InvoiceStatus::Draft, InvoiceStatus::Paid, InvoiceStatus::Void])
                 ->count(),
         ]);
 

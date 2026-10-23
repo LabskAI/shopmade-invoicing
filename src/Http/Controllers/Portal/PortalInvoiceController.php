@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Shopmade\Invoicing\Enums\ClientPaymentMark;
+use Shopmade\Invoicing\Enums\InvoiceStatus;
 use Shopmade\Invoicing\Models\Invoice;
 use Shopmade\Invoicing\Support\JobLink;
 
@@ -20,6 +21,7 @@ class PortalInvoiceController extends Controller
         $invoices = Invoice::query()
             ->with('customer')
             ->whereIn('customer_id', $customerIds)
+            ->where('status', '!=', InvoiceStatus::Draft)
             ->latest('id')
             ->paginate(20);
 

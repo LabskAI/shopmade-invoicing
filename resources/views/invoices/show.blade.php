@@ -55,6 +55,12 @@
                         <dt class="text-label text-ink/70">Due</dt>
                         <dd>{{ $invoice->due_at?->format('M j, Y') ?? '—' }}</dd>
                     </div>
+                    @if ($invoice->client_payment_mark)
+                        <div>
+                            <dt class="text-label text-ink/70">Client says</dt>
+                            <dd>{{ $invoice->client_payment_mark->label() }}</dd>
+                        </div>
+                    @endif
                 </dl>
                 @if ($invoice->notes)
                     <p class="mt-3 text-body text-ink/70">{{ $invoice->notes }}</p>

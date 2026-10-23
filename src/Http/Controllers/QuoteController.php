@@ -94,7 +94,7 @@ class QuoteController extends Controller
     {
         return $request->validate([
             'customer_id' => ['required', 'exists:customers,id'],
-            'job_id' => JobLink::rules(),
+            'job_id' => JobLink::rules($request->integer('customer_id')),
             'status' => ['required', Rule::enum(QuoteStatus::class)],
             'items' => ['required', 'array', 'min:1'],
             'items.*.description' => ['required', 'string', 'max:255'],

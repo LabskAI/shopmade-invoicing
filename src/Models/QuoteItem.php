@@ -31,6 +31,6 @@ class QuoteItem extends Model
 
     public function lineTotal(): float
     {
-        return (float) $this->qty * (float) $this->unit_price;
+        return round((float) $this->qty * (float) $this->unit_price, 2);
     }
 }

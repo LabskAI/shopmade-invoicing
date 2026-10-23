@@ -54,7 +54,7 @@ class Quote extends Model
 
     public function recalculateTotal(): void
     {
-        $this->total = $this->items->sum(fn (QuoteItem $item) => $item->qty * $item->unit_price);
+        $this->total = round($this->items->sum(fn (QuoteItem $item) => $item->lineTotal()), 2);
         $this->save();
     }
 }

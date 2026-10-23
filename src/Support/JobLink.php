@@ -4,6 +4,7 @@ namespace Shopmade\Invoicing\Support;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\Rule;
 
 /**
  * Quotes and invoices can point at a job when the shopmade-jobs package is installed. Without it the job field,
@@ -43,10 +44,14 @@ final class JobLink
     }
 
     /**
-     * @return list<string>
+     * The job must exist and belong to the same customer as the quote or invoice.
+     *
+     * @return list<mixed>
      */
-    public static function rules(): array
+    public static function rules(int $customerId): array
     {
-        return self::installed() ? ['nullable', 'exists:jobs,id'] : ['prohibited'];
+        return self::installed()
+            ? ['nullable', Rule::exists('jobs', 'id')->where('customer_id', $customerId)]
+            : ['prohibited'];
     }
 }
